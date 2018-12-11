@@ -117,16 +117,18 @@ body {
 }
 
 .middle-title {
-  padding-top: 50px;
+  padding-top: 17px;
 }
 
 .middle-title span {
-  font-size: 26px;
+  font-size: 24px;
+  color: #e8207b;
 }
 
 h2 {
   font-size: 30px;
   font-weight: 900 !important;
+  color: #5970a5;
 }
 
 .controls-around {
@@ -231,4 +233,118 @@ table.striped>tbody>tr:nth-child(odd) {
 
 .footer {
   background-color:#dc143c;
+}
+
+#current-username {
+  background-color: white;
+  color: #0062cc;
+  opacity: 0.8;
+  padding: 8px;
+  border-radius: 5px;
+  text-transform: capitalize;
+  margin: 7px;
+}
+
+/* button */
+
+.btn.red, .btn-two.red {
+    background-color: #d23d3d;
+}
+
+.btn-two.cyan {
+    background-color: #273989;
+}
+
+.btn-two.green {
+    background-color: #30a01d;
+}
+
+.btn.small, .btn-two.small, .btn-gradient.small, .btn-effect.small {
+  padding: 8px 18px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+a[class*="btn"] {
+    text-decoration: none;
+}
+
+.btn-two {
+    color: white;
+    padding: 15px 25px;
+    display: inline-block;
+    border: 1px solid rgba(0,0,0,0.21);
+    border-bottom-color: rgba(0,0,0,0.34);
+    text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.34) inset, 0 2px 0 -1px rgba(0,0,0,0.13), 0 3px 0 -1px rgba(0,0,0,0.08), 0 3px 13px -1px rgba(0,0,0,0.21);
+}
+
+.btn, .btn-two {
+    margin: 9px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.party-wrapper {
+    border-bottom-width: 10px;
+    background-color:white;
+    border-radius: 30px 30px 10px 10px;
+    overflow: hidden;
+    font-family: 'Ubuntu', sans-serif;
+
+}
+
+.h1bkgrd {
+  background-color: #dc3545;
+  width: 100%;
+  text-align: center;
+}
+
+.h1bkgrd h1 {
+  color: white;
+  font-weight: 12px;
+  font-weight: 900 !important;
+}
+
+
+.fa-clock:before {
+  font-size: 23px;
+  font-weight: bold;
+}
+.time-space {
+      font-size: 20px;
+      color: #022e5f;
+}
+
+.party-description {
+  margin-top:30px;
+
+}
+
+.party-description h1 {
+  font-weight: 700;
+  font-size: 30px;
+  color: #dc3545;
+}
+
+.p-description {
+  color:#8e8e8e;
+}
+
+p {margin:0;}
+
+.items-to-bring .form-control {
+  width:42%;
+  margin-bottom:12px !important;
+}
+.imgstyle {
+      margin-top: 27px;
+      border-radius: 12px;
+}
+
+.imgstyle img {
+  border-radius: 8px;
 }
