@@ -36,13 +36,13 @@ module.exports = function(sequelize, DataTypes) {
   //   });
   // };
 
-  User.associate = function(models) {
-    User.belongsToMany(models.Party, {
-      as: "Parties",
-      through: { model: models.Attendee, unique: false },
-      foreignKey: "user_id"
-    });
-  };
+  // User.associate = function(models) {
+  //   User.belongsToMany(models.Party, {
+  //     as: "Parties",
+  //     through: { model: models.Attendee, unique: false },
+  //     foreignKey: "user_id"
+  //   });
+  // };
 
   return User;
 };

@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
         len: [1]
       }
     },
-    eventHostAuthenticationId: {
+    AuthenticationId: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -42,6 +42,13 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         len: [1]
       }
+    },
+    displayName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1]
+      }
     }
   });
 
@@ -57,13 +64,13 @@ module.exports = function(sequelize, DataTypes) {
   //   });
   // };
 
-  Party.associate = function(models) {
-    Party.belongsToMany(models.User, {
-      as: "Users",
-      through: { model: models.Attendee, unique: false },
-      foreignKey: "party_id"
-    });
-  };
+  // Party.associate = function(models) {
+  //   Party.belongsToMany(models.User, {
+  //     as: "Users",
+  //     through: { model: models.Attendee, unique: false },
+  //     foreignKey: "party_id"
+  //   });
+  // };
 
   return Party;
 };
