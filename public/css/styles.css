@@ -1,0 +1,234 @@
+/* universal */
+body {
+  font-family: 'Raleway', sans-serif;
+  background-color: #0a193c;
+}
+
+.hero::before {
+  background-image: url("../img/partytime.jpg");
+  background-size: cover;
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  opacity: 0.8;
+}
+
+.left-side {
+  background-image: url("../img/karoke.png");
+  background-size: cover;
+}
+
+.bg-dark {
+  background-color: transparent !important;
+}
+
+/* navigation */
+.navbar-brand {
+  font-family: Arial;
+  font-size: 1.25em;
+}
+
+.logo {
+  float: left;
+  font-size: 30px;
+  font-weight: 700;
+  margin-top: -12px;
+}
+
+.logo a .logo-fa {
+  color: #fff;
+}
+
+.logo a .logo-fa, .shrink .logo a .logo-fa {
+  -webkit-transition: none;
+  transition: none;
+}
+
+.logo a .logo-fa {
+  color: #fff;
+}
+
+.logo-hex:before {
+  -webkit-transform: rotate(60deg);
+  -moz-transform: rotate(60deg);
+  -ms-transform: rotate(60deg);
+  -o-transform: rotate(60deg);
+  transform: rotate(60deg);
+}
+
+.logo-hex:before, .logo-hex:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: inherit;
+  height: inherit;
+  border-radius: inherit;
+  background-color: inherit;
+  content: '';
+}
+
+.fa-stack-1x {
+  line-height: inherit;
+}
+
+.fa-stack-1x, .fa-stack-2x {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.logo a .logo-hex {
+  background-color: #dc143c;
+}
+
+.logo-hex {
+  margin-top: 14px;
+  width: 54px;
+  height: 31px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+/* Google Maps */
+/* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+#map {
+  height: 100%;
+  border-radius: 12px;
+}
+
+/* Optional: Makes the sample page fill the window. */
+.map-container {
+  height: 500px;
+  margin-top: 23px;
+}
+
+.middle {
+  background-color: #fff;
+  height: 300px;
+  width: 100%;
+  margin-top: 65px;
+}
+
+.middle-title {
+  padding-top: 50px;
+}
+
+.middle-title span {
+  font-size: 26px;
+}
+
+h2 {
+  font-size: 30px;
+  font-weight: 900 !important;
+}
+
+.controls-around {
+  background-color: #e20000;
+  border-radius: 0 0 12px 12px;
+  width: 600px;
+  margin-left: 18px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 7px 0 6px 43px;
+}
+
+.controls {
+  background-color: #fff;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  height: 29px;
+  margin-left: 17px;
+  outline: none;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 164px;
+}
+
+.controls:focus {
+  border-color: #4d90fe;
+}
+
+.title {
+  font-weight: bold;
+}
+
+#infowindow-content {
+  display: none;
+}
+
+#map #infowindow-content {
+  display: inline;
+}
+
+/* Middle-module */
+.middle-module {
+  background-color: white;
+}
+
+.bkgrd-white {
+  background-color:white;
+  border-radius:5px;
+}
+
+/* party Time Page */
+
+#party-name {
+    font-weight: normal;
+    font-style: normal;
+    font-size: 39px;
+    margin-right: 12px;
+}
+
+.responsive-table p {
+    display: block;
+    background-color: #f1f1f1;
+    padding: 7px 5px;
+    color: #a99e9e;
+}
+
+thead {
+    width: calc( 100% - 1em );
+    text-align: center;
+}
+
+thead, tbody tr {
+    display: table;
+    table-layout: fixed;
+    width:100%;
+}
+
+table.striped tr {
+    border-bottom: none;
+}
+td, th {
+    padding: 15px 5px;
+    display: table-cell;
+    text-align: left;
+    vertical-align: middle;
+    border-radius: 2px;
+}
+tbody {
+    display: block;
+    height: 200px;
+    overflow: auto;
+}
+table.striped>tbody>tr:nth-child(odd) {
+    background-color: rgba(226, 255, 236, 0.5);
+}
+
+.footer {
+  background-color:#dc143c;
+}

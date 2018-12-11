@@ -1,0 +1,29 @@
+<!--   Body Section   -->
+<div class="container">
+    <div class="row mb-5">
+        <a href="/" class="btn btn-success">Go Back</a>
+    </div>
+    <div>
+        <ul class="list-group">
+            <li class="list-group-item text-center">{{> (lookup . 'partial') partyId=party.id }} </li>
+            <li class="list-group-item text-center"><strong>{{party.eventName}}</strong></li>
+            <li class="list-group-item float-right">{{party.eventDescription}}</li>
+            <li class="list-group-item">Address: {{party.eventAddress}}</li>
+            <li class="list-group-item">Date: {{party.eventDate}}</li>
+            <li class="list-group-item">Time: {{party.eventTime}}</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    const randomTexts = [
+        '<h1>First Content</h1>',
+        '<h1>Second Content</h1>',
+        '<h1>Third Content</h1>'
+    ];
+
+    //console.log('loc parts', location.pathname.split("/")[2])
+    const partyId = location.pathname.split("/")[2];
+    const randomText = randomTexts[partyId - 1] //randomTexts[Math.floor(Math.random()*randomTexts.length)];
+    //document.querySelector('#random-text').innerHTML = randomText;
+</script>
