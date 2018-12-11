@@ -52,25 +52,17 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
-  // Party.associate = function(models) {
-  //   Party.belongsTo(models.User, {
-  //     onDelete: "cascade"
-  //   });
-  // };
+  Party.associate = function(models) {
+    Party.hasMany(models.Attendee, {
+      onDelete: "cascade"
+    });
+  };
 
-  // Party.associate = function(models) {
-  //   Party.hasMany(models.Item, {
-  //     onDelete: "cascade"
-  //   });
-  // };
-
-  // Party.associate = function(models) {
-  //   Party.belongsToMany(models.User, {
-  //     as: "Users",
-  //     through: { model: models.Attendee, unique: false },
-  //     foreignKey: "party_id"
-  //   });
-  // };
+  Party.associate = function(models) {
+    Party.hasMany(models.Item, {
+      onDelete: "cascade"
+    });
+  };
 
   return Party;
 };

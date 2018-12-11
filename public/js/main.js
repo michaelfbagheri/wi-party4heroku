@@ -171,7 +171,7 @@ $(document).ready(function() {
     party = party.substring(party.lastIndexOf("/") + 1);
     var displayName = firebase.auth().currentUser.displayName;
     var id = firebase.auth().currentUser.uid;
-    var URL = "/" + party + "/" + id + "/" + displayName;
+    var URL = "/attendee/" + party + "/" + id + "/" + displayName;
     $.ajax({
       method: "POST",
       url: URL
