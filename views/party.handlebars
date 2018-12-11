@@ -6,6 +6,11 @@
     <div>
         <button id="confirm-attendance">confirm attendance</button>
     </div>
+    <form class="items-to-bring">
+        <input type="text" placeholder="item name" id="item-name">
+        <input type="text" placeholder="item qty" id="item-qty">
+        <button type="submit">submit</button>
+    </form>
     <div>
         <ul class="list-group">
             <li class="list-group-item text-center">{{> (lookup . 'partial') partyId=party.id }} </li>

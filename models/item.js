@@ -16,19 +16,19 @@ module.exports = function(sequelize, DataTypes) {
     },
     qtyCommited: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       validate: {
         len: [1]
       }
     },
     hostAdded: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      allowNull: true,
       validate: {
         len: [1]
       }
     },
-    partyID: {
+    partyId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
@@ -36,6 +36,13 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     AuthenticationId: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1]
+      }
+    },
+    displayName: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {

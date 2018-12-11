@@ -102,7 +102,7 @@ $(document).ready(function() {
   });
 
   $("#logout-btn").on("click", e => {
-    e.preventDefault();
+    event.preventDefault();
 
     localStorage.removeItem("uid");
     firebase
@@ -111,7 +111,7 @@ $(document).ready(function() {
       .then(
         function() {
           console.log("Signed Out");
-          location.reload();
+          location.assign("/");
         },
         function(error) {
           console.error("Sign Out Error", error);
@@ -175,6 +175,35 @@ $(document).ready(function() {
     $.ajax({
       method: "POST",
       url: URL
+    })
+      .then(function(data) {
+        console.log(data);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  });
+
+  $(".items-to-bring").on("submit", function(event) {
+    event.preventDefault();
+    var party = window.location.pathname;
+    party = party.substring(party.lastIndexOf("/") + 1);
+    var displayName = firebase.auth().currentUser.displayName;
+    var id = firebase.auth().currentUser.uid;
+    var URL = "/item/" + party + "/" + id + "/" + displayName;
+    var itemToBring = {
+      itemName: $("#item-name")
+        .val()
+        .trim(),
+      itemQty: $("#item-qty")
+        .val()
+        .trim()
+    };
+    console.log(itemToBring);
+    $.ajax({
+      method: "POST",
+      url: URL,
+      data: itemToBring
     })
       .then(function(data) {
         console.log(data);

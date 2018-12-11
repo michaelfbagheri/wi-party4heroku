@@ -42,6 +42,7 @@ module.exports = function(app) {
   app.delete("/api/parties/:id", function(req, res) {
     db.Party.destroy({ where: { id: req.params.id } })
       .then(party => {
+        console.log(party);
         res.send({ msg: "Party record deleted" });
       })
       .catch(err => res.send(err));
@@ -58,6 +59,25 @@ module.exports = function(app) {
       .then(function(dbAttendee) {
         console.log(dbAttendee.dataValues.displayName + " has been added to the attendee table");
         res.send(dbAttendee);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  });
+
+  app.post("/item/:party/:id/:displayName", function(req, res) {
+    console.log(req.params.party);
+    console.log(req.params.displayName);
+    db.Item.create({
+      AuthenticationId: req.params.id,
+      partyId: req.params.party,
+      displayName: req.params.displayName,
+      itemName: req.body.itemName,
+      qtyRequested: req.body.itemQty
+    })
+      .then(function(dbItem) {
+        console.log(dbItem.dataValues.itemName + " has been added to the Item table");
+        res.send(dbItem);
       })
       .catch(function(error) {
         console.log(error);
