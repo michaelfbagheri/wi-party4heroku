@@ -12,13 +12,6 @@ module.exports = function(sequelize, DataTypes) {
         len: [1]
       }
     },
-    partyId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      validate: {
-        len: [1]
-      }
-    },
     displayName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -30,6 +23,15 @@ module.exports = function(sequelize, DataTypes) {
 
   Attendee.associate = function(models) {
     Attendee.hasMany(models.Item, {
+      onDelete: "cascade"
+    });
+  };
+
+  Attendee.associate = function(models) {
+    Attendee.belongsTo(models.Party, {
+      foreignKey: {
+        allowNull: false
+      },
       onDelete: "cascade"
     });
   };

@@ -48,12 +48,12 @@ module.exports = function(app) {
       .catch(err => res.send(err));
   });
 
-  app.post("/:party/:id/:displayName", function(req, res) {
+  app.post("/attendee/:party/:id/:displayName", function(req, res) {
     console.log(req.params.party);
     console.log(req.params.displayName);
     db.Attendee.create({
       AuthenticationId: req.params.id,
-      partyId: req.params.party,
+      PartyId: req.params.party,
       displayName: req.params.displayName
     })
       .then(function(dbAttendee) {
@@ -70,7 +70,7 @@ module.exports = function(app) {
     console.log(req.params.displayName);
     db.Item.create({
       AuthenticationId: req.params.id,
-      partyId: req.params.party,
+      PartyId: req.params.party,
       displayName: req.params.displayName,
       itemName: req.body.itemName,
       qtyRequested: req.body.itemQty

@@ -28,13 +28,13 @@ module.exports = function(sequelize, DataTypes) {
         len: [1]
       }
     },
-    partyId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      validate: {
-        len: [1]
-      }
-    },
+    // partyId: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false,
+    //   validate: {
+    //     len: [1]
+    //   }
+    // },
     AuthenticationId: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -52,7 +52,10 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Item.associate = function(models) {
-    Item.belongsTo(models.Attendee, {
+    Item.belongsTo(models.Party, {
+      foreignKey: {
+        allowNull: false
+      },
       onDelete: "cascade"
     });
   };
