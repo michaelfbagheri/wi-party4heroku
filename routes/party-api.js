@@ -18,18 +18,25 @@ module.exports = function(app) {
   });
 
   app.post("/api/parties", function(req, res) {
+    console.log("inside the api post for creating parties");
+    console.log("here to create " + req.body.eventName);
     db.Party.create({
       eventName: req.body.eventName,
       eventAddress: req.body.eventAddress,
       eventDate: req.body.eventDate,
       eventTime: req.body.eventTime,
       AuthenticationId: req.body.eventHostAuthenticationId,
-      eventDescription: req.body.eventDiscription
+      eventDescription: req.body.eventDiscription,
+      displayName: req.body.displayName
     })
       .then(function(dbParty) {
+        console.log("following obj was created in the party table: " + dbParty);
         res.send(dbParty);
       })
-      .catch(err => res.send(err));
+      .catch(err => {
+        console.log(err);
+        res.send(err);
+      });
   });
 
   app.delete("/api/parties/:id", function(req, res) {

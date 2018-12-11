@@ -5,20 +5,26 @@ function initMap() {
     mapTypeId: google.maps.MapTypeId.ROADMAP
   });
 
-  const getMarkerLink = (party) => {
-    if (localStorage.getItem('uid')) {
+  //upon clicking the map marker, this function populates the google popup with the party href link
+  const getMarkerLink = party => {
+    if (localStorage.getItem("uid")) {
       return `<a href=/parties/${party.id}><strong>${party.eventName}</strong></a>`;
     } else {
-      return `<a href=#><b>Please Login to view Party details</b></a>`;
+      return "<a href=#><b>Please Login to view Party details</b></a>";
     }
-  }
+  };
 
   const infoWindow = new google.maps.InfoWindow();
 
-  fetch('/api/parties').then(res => res.json())
+  fetch("/api/parties")
+    .then(res => res.json())
     .then(parties => {
       let arrOfPromise = parties.map(party => {
-        return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${party.eventAddress}&key=AIzaSyAw1zriz4pPpa2YVpyr9tAhomDohpi2FBg`)
+        return fetch(
+          `https://maps.googleapis.com/maps/api/geocode/json?address=${
+              party.eventAddress
+          }&key=AIzaSyAw1zriz4pPpa2YVpyr9tAhomDohpi2FBg`
+        )
           .then(res => res.json())
           .then(addressData => {
             const { lat, lng } = addressData.results[0].geometry.location;
@@ -32,29 +38,39 @@ function initMap() {
               eventAddress: party.eventAddress
             });
 
-            google.maps.event.addListener(marker, "click", function (e) {
-              infoWindow.setContent(`<div class=text-center> ${getMarkerLink(party)} <br/> ${party.eventDescription} </div>`);
+            //event listening for the flag link (party) to be clicked so we can redirect
+            google.maps.event.addListener(marker, "click", function(e) {
+              infoWindow.setContent(
+                `<div class=text-center> ${getMarkerLink(party)} <br/> ${
+                    party.eventDescription
+                } </div>`
+              );
               infoWindow.open(map, marker);
             });
             return marker;
-          }).catch(err => err);
+          })
+          .catch(err => err);
       });
 
-      Promise.all(arrOfPromise).then(markers => {
-        const markersCopy = markers;
-        document.querySelector('#pac-input').addEventListener('input', (e) => {
-          const address = e.target.value;
-          markers.forEach(m => m.setVisible(false))
-          if (address) {
-            markers = markersCopy.filter(m => m.eventAddress.toLowerCase().indexOf(address.toLowerCase()) >= 0);
-            markers.forEach(m => m.setVisible(true))
-          } else {
+      Promise.all(arrOfPromise)
+        .then(markers => {
+          const markersCopy = markers;
+          document.querySelector("#pac-input").addEventListener("input", e => {
+            const address = e.target.value;
             markers.forEach(m => m.setVisible(false));
-            markers = markersCopy;
-            markers.forEach(m => m.setVisible(true))
-          }
-        });
-      }).catch(err => console.log('err loading markers', err))
+            if (address) {
+              markers = markersCopy.filter(
+                m => m.eventAddress.toLowerCase().indexOf(address.toLowerCase()) >= 0
+              );
+              markers.forEach(m => m.setVisible(true));
+            } else {
+              markers.forEach(m => m.setVisible(false));
+              markers = markersCopy;
+              markers.forEach(m => m.setVisible(true));
+            }
+          });
+        })
+        .catch(err => console.log("err loading markers", err));
     })
-    .catch(err => console.log('error loading Map Data', err))
+    .catch(err => console.log("error loading Map Data", err));
 }

@@ -132,6 +132,7 @@ $(document).ready(function() {
     if (uid) {
       var addEvent = {
         eventHostAuthenticationId: firebase.auth().currentUser.uid,
+        displayName: firebase.auth().currentUser.displayName,
         eventName: $("#event-name")
           .val()
           .trim(),
@@ -148,7 +149,8 @@ $(document).ready(function() {
           .val()
           .trim()
       };
-
+      debugger;
+      console.log(addEvent);
       $.ajax({
         method: "POST",
         url: "/api/parties",
