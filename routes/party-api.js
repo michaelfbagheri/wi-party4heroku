@@ -46,4 +46,21 @@ module.exports = function(app) {
       })
       .catch(err => res.send(err));
   });
+
+  app.post("/:party/:id/:displayName", function(req, res) {
+    console.log(req.params.party);
+    console.log(req.params.displayName);
+    db.Attendee.create({
+      AuthenticationId: req.params.id,
+      partyId: req.params.party,
+      displayName: req.params.displayName
+    })
+      .then(function(dbAttendee) {
+        console.log(dbAttendee.dataValues.displayName + " has been added to the attendee table");
+        res.send(dbAttendee);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  });
 };

@@ -11,7 +11,7 @@ $(document).ready(function() {
   firebase.initializeApp(config);
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-      console.log("Currewnt User: ", firebase.auth().currentUser.displayName);
+      console.log("Current User: ", firebase.auth().currentUser.displayName);
       localStorage.setItem("uid", firebase.auth().currentUser.uid);
       $("#current-username").text(firebase.auth().currentUser.displayName);
     } else {
@@ -149,7 +149,6 @@ $(document).ready(function() {
           .val()
           .trim()
       };
-      debugger;
       console.log(addEvent);
       $.ajax({
         method: "POST",
@@ -164,5 +163,24 @@ $(document).ready(function() {
     } else {
       console.log("please sign up or login");
     }
+  });
+
+  //call to add attendee to the attendace table
+  $("#confirm-attendance").on("click", function() {
+    var party = window.location.pathname;
+    party = party.substring(party.lastIndexOf("/") + 1);
+    var displayName = firebase.auth().currentUser.displayName;
+    var id = firebase.auth().currentUser.uid;
+    var URL = "/" + party + "/" + id + "/" + displayName;
+    $.ajax({
+      method: "POST",
+      url: URL
+    })
+      .then(function(data) {
+        console.log(data);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   });
 });
