@@ -20,13 +20,61 @@ module.exports = function(app) {
       where: { id: req.params.id },
       include: [
         {
-          model: db.Item,
-          where: { PartyId: req.params.id }
+          model: db.Attendee,
+          include: [
+            {
+              model: db.Item
+            }
+          ]
         }
       ]
-    }).then(party => {
-      console.log(party.dataValues.Items[1].dataValues.itemName);
-      res.render("party", { party, title: `wi-Party - ${party.eventName}`, partial: "sample" });
-    });
+    })
+      .then(party => {
+        console.log("Name of the Party is: " + party.dataValues.eventName);
+        var test = party.dataValues.Attendees;
+        for (var i in test) {
+          console.log(
+            "Attendee #" +
+              i +
+              ": " +
+              test[i].dataValues.displayName +
+              " is bringing " +
+              test[i].dataValues.Items[i].qtyRequested +
+              " " +
+              test[i].dataValues.Items[i].itemName +
+              "'s"
+          );
+        }
+        // console.log(party.dataValues.Attendees);
+        // console.log(party.dataValues.Attendees);
+        // console.log(JSON.stringify(party));
+        // const resObj = party.map(party => {
+        //   return Object.assign(
+        //     {},
+        //     {
+        //       id: party.id,
+        //       eventName: party.eventName,
+        //       items: party.Items.map(Item => {
+        //         return Object.assign(
+        //           {},
+        //           {
+        //             itemName: Item.itemName,
+        //             qtyRequested: Item.qtyRequested,
+        //             qtyCommited: Item.qtyCommited,
+        //             hostAdded: Item.hostAdded,
+        //             ItemAuthenticationId: Item.AuthenticationId,
+        //             addedBy: Item.displayName
+        //           }
+        //         );
+        //       })
+        //     }
+        //   );
+        // });
+        // console.log(resObj[0]);
+        res.render("party", { party, title: `wi-Party - ${party.eventName}`, partial: "sample" });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   });
 };

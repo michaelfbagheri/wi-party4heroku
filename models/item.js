@@ -28,20 +28,6 @@ module.exports = function(sequelize, DataTypes) {
         len: [1]
       }
     },
-    // partyId: {
-    //   type: DataTypes.INTEGER,
-    //   allowNull: false,
-    //   validate: {
-    //     len: [1]
-    //   }
-    // },
-    AuthenticationId: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [1]
-      }
-    },
     displayName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -52,19 +38,10 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Item.associate = function(models) {
-    Item.belongsTo(models.Party, {
-      foreignKey: {
-        allowNull: false
-      },
-      onDelete: "cascade"
+    Item.belongsTo(models.Attendee, {
+      foreignKey: "attendeeAuthenticationId"
     });
   };
-
-  // Item.associate = function(models) {
-  //   Item.belongsTo(models.Party, {
-  //     onDelete: "cascade"
-  //   });
-  // };
 
   return Item;
 };

@@ -178,6 +178,7 @@ $(document).ready(function() {
     })
       .then(function(data) {
         console.log(data);
+        location.reload();
       })
       .catch(function(error) {
         console.log(error);
@@ -207,6 +208,7 @@ $(document).ready(function() {
     })
       .then(function(data) {
         console.log(data);
+        location.reload();
       })
       .catch(function(error) {
         console.log(error);

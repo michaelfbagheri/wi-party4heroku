@@ -67,9 +67,9 @@ module.exports = function(app) {
 
   app.post("/item/:party/:id/:displayName", function(req, res) {
     console.log(req.params.party);
-    console.log(req.params.displayName);
+    console.log("name: " + req.params.id + "is trying to add item:" + req.body.itemName);
     db.Item.create({
-      AuthenticationId: req.params.id,
+      attendeeAuthenticationId: req.params.id,
       PartyId: req.params.party,
       displayName: req.params.displayName,
       itemName: req.body.itemName,

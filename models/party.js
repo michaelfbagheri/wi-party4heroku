@@ -1,6 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
   var Party = sequelize.define("Party", {
-    // Giving the Author model a name of type STRING
     eventName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -54,12 +53,9 @@ module.exports = function(sequelize, DataTypes) {
 
   Party.associate = function(models) {
     Party.hasMany(models.Attendee, {
-      onDelete: "cascade"
-    });
-  };
-
-  Party.associate = function(models) {
-    Party.hasMany(models.Item, {
+      foreignKey: {
+        allowNull: false
+      },
       onDelete: "cascade"
     });
   };

@@ -1,12 +1,9 @@
 module.exports = function(sequelize, DataTypes) {
   var Attendee = sequelize.define("Attendee", {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
-    },
     AuthenticationId: {
       type: DataTypes.STRING,
+      primaryKey: true,
+      autoIncrement: false,
       allowNull: false,
       validate: {
         len: [1]
@@ -23,15 +20,8 @@ module.exports = function(sequelize, DataTypes) {
 
   Attendee.associate = function(models) {
     Attendee.hasMany(models.Item, {
-      onDelete: "cascade"
-    });
-  };
-
-  Attendee.associate = function(models) {
-    Attendee.belongsTo(models.Party, {
-      foreignKey: {
-        allowNull: false
-      },
+      foreignKey: "attendeeAuthenticationId",
+      allowNull: false,
       onDelete: "cascade"
     });
   };
