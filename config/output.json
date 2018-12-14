@@ -1,0 +1,76 @@
+{
+    "id": 1,
+    "eventName": "first Party",
+    "AuthenticationId": "caLmuVVLjchT2FSYf2EPUA2Bt2e2",
+    "eventAddress": "301 Biscayne Boulevard, Miami, FL, USA",
+    "eventDate": "12/12/18",
+    "eventTime": "10:00",
+    "eventDescription": "first Party",
+    "displayName": "user852",
+    "createdAt": "2018-12-13T01:28:26.000Z",
+    "updatedAt": "2018-12-13T01:28:26.000Z",
+    "Attendees": [
+        {
+            "AuthenticationId": "caLmuVVLjchT2FSYf2EPUA2Bt2e2",
+            "displayName": "user852",
+            "createdAt": "2018-12-13T01:28:39.000Z",
+            "updatedAt": "2018-12-13T01:28:39.000Z",
+            "PartyId": 1,
+            "Items": [
+                {
+                    "id": 1,
+                    "itemName": "beer",
+                    "qtyRequested": 24,
+                    "qtyCommited": null,
+                    "hostAdded": null,
+                    "displayName": "user852",
+                    "createdAt": "2018-12-13T01:28:51.000Z",
+                    "updatedAt": "2018-12-13T01:28:51.000Z",
+                    "attendeeAuthenticationId": "caLmuVVLjchT2FSYf2EPUA2Bt2e2"
+                },
+                {
+                    "id": 2,
+                    "itemName": "scotch",
+                    "qtyRequested": 10,
+                    "qtyCommited": null,
+                    "hostAdded": null,
+                    "displayName": "user852",
+                    "createdAt": "2018-12-13T01:32:15.000Z",
+                    "updatedAt": "2018-12-13T01:32:15.000Z",
+                    "attendeeAuthenticationId": "caLmuVVLjchT2FSYf2EPUA2Bt2e2"
+                }
+            ]
+        },
+        {
+            "AuthenticationId": "yeNwK08AfnVCvhRLw1DmIL9duBn1",
+            "displayName": "user853",
+            "createdAt": "2018-12-13T01:32:59.000Z",
+            "updatedAt": "2018-12-13T01:32:59.000Z",
+            "PartyId": 1,
+            "Items": [
+                {
+                    "id": 3,
+                    "itemName": "pizza",
+                    "qtyRequested": 10,
+                    "qtyCommited": null,
+                    "hostAdded": null,
+                    "displayName": "user853",
+                    "createdAt": "2018-12-13T01:33:38.000Z",
+                    "updatedAt": "2018-12-13T01:33:38.000Z",
+                    "attendeeAuthenticationId": "yeNwK08AfnVCvhRLw1DmIL9duBn1"
+                },
+                {
+                    "id": 4,
+                    "itemName": "juice",
+                    "qtyRequested": 1,
+                    "qtyCommited": null,
+                    "hostAdded": null,
+                    "displayName": "user853",
+                    "createdAt": "2018-12-13T01:35:12.000Z",
+                    "updatedAt": "2018-12-13T01:35:12.000Z",
+                    "attendeeAuthenticationId": "yeNwK08AfnVCvhRLw1DmIL9duBn1"
+                }
+            ]
+        }
+    ]
+}

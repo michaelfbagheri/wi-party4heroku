@@ -29,26 +29,25 @@ module.exports = function(app) {
         }
       ]
     })
-      .then(party => {
-        console.log("Name of the Party is: " + party.dataValues.eventName);
-        var test = party.dataValues.Attendees;
-        for (var i in test) {
-          console.log(
-            "Attendee #" +
-              i +
-              ": " +
-              test[i].dataValues.displayName +
-              " is bringing " +
-              test[i].dataValues.Items[i].qtyRequested +
-              " " +
-              test[i].dataValues.Items[i].itemName +
-              "'s"
-          );
-        }
-        // console.log(party.dataValues.Attendees);
-        // console.log(party.dataValues.Attendees);
-        // console.log(JSON.stringify(party));
-        // const resObj = party.map(party => {
+      .then(data => {
+        // console.log("Name of the Party is: " + party.dataValues.eventName);
+        // var test = party.dataValues.Attendees;
+        // for (var i in test) {
+        //   console.log(
+        //     "Attendee #" +
+        //       i +
+        //       ": " +
+        //       test[i].dataValues.displayName +
+        //       " is bringing " +
+        //       test[i].dataValues.Items[i].qtyRequested +
+        //       " " +
+        //       test[i].dataValues.Items[i].itemName +
+        //       "'s"
+        //   );
+        // }
+
+        console.log(JSON.stringify(data));
+        // const resObj = data.map(party => {
         //   return Object.assign(
         //     {},
         //     {
@@ -71,7 +70,7 @@ module.exports = function(app) {
         //   );
         // });
         // console.log(resObj[0]);
-        res.render("party", { party, title: `wi-Party - ${party.eventName}`, partial: "sample" });
+        res.render("party", { data, title: `wi-Party - ${data.eventName}`, partial: "sample" });
       })
       .catch(function(error) {
         console.log(error);
