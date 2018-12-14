@@ -14,16 +14,16 @@ app.use(express.static("public"));
 
 var exphbs = require("express-handlebars");
 
-var exphbs = require('express-handlebars');
+var exphbs = require("express-handlebars");
 var hbsHelpers = exphbs.create({
-    helpers: require("./helpers/handlebars.js").helpers,
-    defaultLayout: 'main',
-    extname: '.handlebars',
-    partialsDir: __dirname + '/views/partials/'
+  helpers: require("./helpers/handlebars.js").helpers,
+  defaultLayout: "main",
+  extname: ".handlebars",
+  partialsDir: __dirname + "/views/partials/"
 });
 
-app.engine('.handlebars', hbsHelpers.engine);
-app.set('view engine', '.handlebars');
+app.engine(".handlebars", hbsHelpers.engine);
+app.set("view engine", ".handlebars");
 
 // Routes
 // =============================================================
