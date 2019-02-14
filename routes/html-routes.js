@@ -46,26 +46,26 @@ module.exports = function(app) {
         //   );
         // }
 
-        console.log(JSON.stringify(data));
+        // console.log(JSON.stringify(data));
         // const resObj = data.map(party => {
         //   return Object.assign(
         //     {},
         //     {
         //       id: party.id,
-        //       eventName: party.eventName,
-        //       items: party.Items.map(Item => {
-        //         return Object.assign(
-        //           {},
-        //           {
-        //             itemName: Item.itemName,
-        //             qtyRequested: Item.qtyRequested,
-        //             qtyCommited: Item.qtyCommited,
-        //             hostAdded: Item.hostAdded,
-        //             ItemAuthenticationId: Item.AuthenticationId,
-        //             addedBy: Item.displayName
-        //           }
-        //         );
-        //       })
+        //       eventName: party.eventName
+        // items: data.values.Attendee.map(Item => {
+        //   return Object.assign(
+        //     {},
+        //     {
+        //       itemName: Item.itemName,
+        //       qtyRequested: Item.qtyRequested,
+        //       qtyCommited: Item.qtyCommited,
+        //       hostAdded: Item.hostAdded,
+        //       ItemAuthenticationId: Item.AuthenticationId,
+        //       addedBy: Item.displayName
+        //     }
+        //   );
+        // })
         //     }
         //   );
         // });

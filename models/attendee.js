@@ -2,8 +2,6 @@ module.exports = function(sequelize, DataTypes) {
   var Attendee = sequelize.define("Attendee", {
     AuthenticationId: {
       type: DataTypes.STRING,
-      primaryKey: true,
-      autoIncrement: false,
       allowNull: false,
       validate: {
         len: [1]

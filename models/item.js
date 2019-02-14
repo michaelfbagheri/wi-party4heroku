@@ -39,7 +39,8 @@ module.exports = function(sequelize, DataTypes) {
 
   Item.associate = function(models) {
     Item.belongsTo(models.Attendee, {
-      foreignKey: "attendeeAuthenticationId"
+      foreignKey: "attendeeAuthenticationId",
+      type: DataTypes.STRING
     });
   };
 

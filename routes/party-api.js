@@ -5,7 +5,7 @@ module.exports = function(app) {
     db.User.create({
       name: req.body.name,
       email: req.body.email,
-      Authentication: req.body.Authentication
+      AuthenticationId: req.body.Authentication
     }).then(function(dbUser) {
       res.send(dbUser);
     });
