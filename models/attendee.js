@@ -17,11 +17,7 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Attendee.associate = function(models) {
-    Attendee.hasMany(models.Item, {
-      foreignKey: "attendeeAuthenticationId",
-      allowNull: false,
-      onDelete: "cascade"
-    });
+    Attendee.hasMany(models.Item);
   };
 
   return Attendee;

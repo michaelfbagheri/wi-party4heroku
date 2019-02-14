@@ -68,18 +68,31 @@ module.exports = function(app) {
   app.post("/item/:party/:id/:displayName", function(req, res) {
     console.log(req.params.party);
     console.log("name: " + req.params.id + "is trying to add item:" + req.body.itemName);
-    db.Item.create({
-      attendeeAuthenticationId: req.params.id,
-      PartyId: req.params.party,
-      displayName: req.params.displayName,
-      itemName: req.body.itemName,
-      qtyRequested: req.body.itemQty
+    db.Attendee.findOne({
+      where: {
+        AuthenticationId: req.params.id,
+        PartyId: req.params.party
+      }
     })
+      .then(attendee => {
+        if (!attendee) {
+          throw new Error("The attendee does not exist.");
+        }
+        return db.Item.create({
+          //attendee.addItem({
+          AttendeeId: attendee.id,
+          PartyId: req.params.party,
+          displayName: req.params.displayName,
+          itemName: req.body.itemName,
+          qtyRequested: req.body.itemQty
+        });
+      })
       .then(function(dbItem) {
         console.log(dbItem.dataValues.itemName + " has been added to the Item table");
         res.send(dbItem);
       })
       .catch(function(error) {
+        debugger;
         console.log(error);
       });
   });

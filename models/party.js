@@ -52,12 +52,7 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Party.associate = function(models) {
-    Party.hasMany(models.Attendee, {
-      foreignKey: {
-        allowNull: false
-      },
-      onDelete: "cascade"
-    });
+    Party.hasMany(models.Attendee);
   };
 
   return Party;
