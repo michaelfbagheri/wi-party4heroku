@@ -5,7 +5,7 @@ module.exports = function(app) {
     db.User.create({
       name: req.body.name,
       email: req.body.email,
-      Authentication: req.body.Authentication
+      AuthenticationId: req.body.Authentication
     }).then(function(dbUser) {
       res.send(dbUser);
     });
@@ -51,36 +51,152 @@ module.exports = function(app) {
   app.post("/attendee/:party/:id/:displayName", function(req, res) {
     console.log(req.params.party);
     console.log(req.params.displayName);
-    db.Attendee.create({
-      AuthenticationId: req.params.id,
-      PartyId: req.params.party,
-      displayName: req.params.displayName
+    db.Attendee.findOne({
+      where: {
+        AuthenticationId: req.params.id,
+        PartyId: req.params.party
+      }
     })
-      .then(function(dbAttendee) {
-        console.log(dbAttendee.dataValues.displayName + " has been added to the attendee table");
-        res.send(dbAttendee);
+      .then(attendee => {
+        if (!attendee) {
+          return db.Attendee.create({
+            AuthenticationId: req.params.id,
+            PartyId: req.params.party,
+            displayName: req.params.displayName
+          })
+            .then(dbAttendee => {
+              console.log(`
+          newly created record: ${dbAttendee}`);
+              res.send(dbAttendee);
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        }
+        res.send(attendee);
       })
-      .catch(function(error) {
-        console.log(error);
+      .catch(Error => {
+        console.log(Error);
       });
   });
 
-  app.post("/item/:party/:id/:displayName", function(req, res) {
-    console.log(req.params.party);
-    console.log("name: " + req.params.id + "is trying to add item:" + req.body.itemName);
-    db.Item.create({
-      attendeeAuthenticationId: req.params.id,
-      PartyId: req.params.party,
-      displayName: req.params.displayName,
-      itemName: req.body.itemName,
-      qtyRequested: req.body.itemQty
+  app.post("/item/:party/:id", function(req, res) {
+    console.log(req.params.id);
+    console.log("name: " + req.params.id + "is trying to add an item");
+    db.Attendee.findOne({
+      where: {
+        AuthenticationId: req.params.id,
+        PartyId: req.params.party
+      }
     })
+      .then(attendee => {
+        if (!attendee) {
+          throw new Error("The attendee does not exist.");
+        }
+        return db.Item.create({
+          //attendee.addItem({
+          AttendeeId: attendee.id,
+          PartyId: req.params.party,
+          itemName: req.body.itemName,
+          qtyRequested: req.body.itemQty,
+          satisfied: true
+        });
+      })
       .then(function(dbItem) {
         console.log(dbItem.dataValues.itemName + " has been added to the Item table");
         res.send(dbItem);
       })
       .catch(function(error) {
+        debugger;
         console.log(error);
+      });
+  });
+
+  app.post("/items/commit", (req, res) => {
+    console.log(`we want to modify ${req.body.itemId} by one`);
+    db.Item.findOne({
+      where: {
+        id: req.body.itemId
+      }
+    })
+      .then(data => {
+        var newValue = data.qtyCommited + 1;
+        if (data.qtyRequested === data.qtyCommited + 1) {
+          var satisfiedOrder = false;
+        } else {
+          var satisfiedOrder = true;
+        }
+        return db.Item.update(
+          {
+            qtyCommited: newValue,
+            satisfied: satisfiedOrder
+          },
+          {
+            where: {
+              id: data.id
+            }
+          }
+        )
+          .then(dbUpdate => {
+            res.send(dbUpdate);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  });
+
+  //API call shows all attendees of a particular party
+  app.get("/item/:party", (req, res) => {
+    db.Attendee.findAll({
+      where: {
+        PartyId: req.params.party
+      }
+    })
+      .then(AllAttendees => {
+        console.log(AllAttendees);
+        res.send(AllAttendees);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  });
+
+  //return all items that are being brough to a particular party along with who is bring them
+  app.get("/items/:party", (req, res) => {
+    db.Attendee.findAll({
+      where: {
+        PartyId: req.params.party
+      },
+      include: [
+        {
+          model: db.Item
+        }
+      ]
+    })
+      .then(AllAttendees => {
+        // below algorithm map's out the contents of teh returned
+        AllAttendees.map(oneAttendee => {
+          console.log(
+            `
+            Display Name: ${oneAttendee.displayName}
+            PartyID: ${oneAttendee.PartyId}
+            `
+          );
+          oneAttendee.Items.map(item => {
+            console.log(`
+            item Name: ${item.itemName}
+            item Qty: ${item.qtyRequested}
+            `);
+          });
+        });
+        res.send(AllAttendees);
+      })
+      .catch(err => {
+        console.log(err);
       });
   });
 };
