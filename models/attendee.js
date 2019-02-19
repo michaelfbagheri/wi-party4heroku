@@ -18,6 +18,7 @@ module.exports = function(sequelize, DataTypes) {
 
   Attendee.associate = function(models) {
     Attendee.hasMany(models.Item);
+    Attendee.belongsTo(models.Party);
   };
 
   return Attendee;

@@ -101,9 +101,8 @@ $(document).ready(function() {
       });
   });
 
-  $("#logout-btn").on("click", e => {
+  $("#logout-btn").on("click", event => {
     event.preventDefault();
-
     localStorage.removeItem("uid");
     firebase
       .auth()
@@ -185,13 +184,32 @@ $(document).ready(function() {
       });
   });
 
+  $(".fa-plus-circle").on("click", function() {
+    var Item = {
+      itemId: $(this).attr("value")
+    };
+    $(this).prop("disabled", true);
+    var URL = "/items/commit";
+    $.ajax({
+      method: "POST",
+      url: URL,
+      data: Item
+    })
+      .then(function(data) {
+        console.log(data);
+        location.reload();
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  });
+
   $(".items-to-bring").on("submit", function(event) {
     event.preventDefault();
     var party = window.location.pathname;
     party = party.substring(party.lastIndexOf("/") + 1);
-    var displayName = firebase.auth().currentUser.displayName;
     var id = firebase.auth().currentUser.uid;
-    var URL = "/item/" + party + "/" + id + "/" + displayName;
+    var URL = "/item/" + party + "/" + id;
     var itemToBring = {
       itemName: $("#item-name")
         .val()

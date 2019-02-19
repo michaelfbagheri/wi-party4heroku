@@ -16,64 +16,42 @@ module.exports = function(app) {
   });
 
   app.get("/parties/:id", (req, res) => {
-    db.Party.findOne({
-      where: { id: req.params.id },
+    console.log(req.params.id);
+    db.Attendee.findAll({
+      where: {
+        PartyId: req.params.id
+      },
       include: [
         {
-          model: db.Attendee,
-          include: [
-            {
-              model: db.Item
-            }
-          ]
+          model: db.Item
+        },
+        {
+          model: db.Party
         }
       ]
     })
       .then(data => {
-        // console.log("Name of the Party is: " + party.dataValues.eventName);
-        // var test = party.dataValues.Attendees;
-        // for (var i in test) {
-        //   console.log(
-        //     "Attendee #" +
-        //       i +
-        //       ": " +
-        //       test[i].dataValues.displayName +
-        //       " is bringing " +
-        //       test[i].dataValues.Items[i].qtyRequested +
-        //       " " +
-        //       test[i].dataValues.Items[i].itemName +
-        //       "'s"
-        //   );
-        // }
+        var partyInfo = {};
+        // below algorithm map's out the contents of teh returned
+        data.map(oneAttendee => {
+          partyInfo.host = oneAttendee.Party.displayName;
+          partyInfo.eventAddress = oneAttendee.Party.eventAddress;
+          partyInfo.eventTime = oneAttendee.Party.eventTime;
+          partyInfo.eventName = oneAttendee.Party.eventName;
+        });
 
-        // console.log(JSON.stringify(data));
-        // const resObj = data.map(party => {
-        //   return Object.assign(
-        //     {},
-        //     {
-        //       id: party.id,
-        //       eventName: party.eventName
-        // items: data.values.Attendee.map(Item => {
-        //   return Object.assign(
-        //     {},
-        //     {
-        //       itemName: Item.itemName,
-        //       qtyRequested: Item.qtyRequested,
-        //       qtyCommited: Item.qtyCommited,
-        //       hostAdded: Item.hostAdded,
-        //       ItemAuthenticationId: Item.AuthenticationId,
-        //       addedBy: Item.displayName
-        //     }
-        //   );
-        // })
-        //     }
-        //   );
-        // });
-        // console.log(resObj[0]);
-        res.render("party", { data, title: `wi-Party - ${data.eventName}`, partial: "sample" });
+        partyInfoArray = [partyInfo];
+
+        // res.send(data);
+        res.render("party", {
+          Attendees: data,
+          PartyData: partyInfoArray,
+          title: `wi-Party - ${partyInfo.eventName}`,
+          partial: "sample"
+        });
       })
-      .catch(function(error) {
-        console.log(error);
+      .catch(err => {
+        console.log(err);
       });
   });
 };

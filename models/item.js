@@ -28,12 +28,9 @@ module.exports = function(sequelize, DataTypes) {
         len: [1]
       }
     },
-    displayName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [1]
-      }
+    satisfied: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true
     }
   });
 
